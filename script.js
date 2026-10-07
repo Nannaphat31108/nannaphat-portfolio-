@@ -1,0 +1,5 @@
+document.getElementById('year').textContent=new Date().getFullYear();
+const buttons=document.querySelectorAll('[data-filter]'),projects=document.querySelectorAll('.project');
+buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;projects.forEach(p=>p.classList.toggle('hidden',f!=='all'&&!p.dataset.cat.split(' ').includes(f)));}));
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.animate([{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],{duration:500,easing:'ease-out',fill:'both'});observer.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('.project,.skill-grid article').forEach(el=>observer.observe(el));
