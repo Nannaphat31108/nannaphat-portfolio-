@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="nav"><a class="brand" href="#home">NC<span>.</span></a><nav><a href="#about">About</a><a href="#numbers">Numbers</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#journey">Journey</a><a href="#contact">Contact</a></nav></header>
+<header class="nav"><a class="brand" href="#home">NC<span>.</span></a><nav><a href="#about">About</a><a href="#numbers">Numbers</a><a href="#skills">Skills</a><a href="#app">App</a><a href="#projects">Projects</a><a href="#journey">Journey</a><a href="#contact">Contact</a></nav></header>
 <main>
 <section id="home" class="hero">
 <div class="hero-copy"><p class="eyebrow">SOFTWARE • AI/IoT • EMBEDDED • ENGINEERING</p><h1>Building systems that connect <em>software</em> with the real world.</h1>
@@ -50,7 +50,15 @@
 <article><span>08</span><h3>Design</h3><p>UI/UX · Responsive layouts · Bilingual TH/EN · Print layouts</p><ul><li>A4 &amp; 80mm receipt print styles</li><li>Thai typography (TH Sarabun)</li></ul></article>
 </div></section>
 
-<section id="projects" class="section"><div class="section-head"><div><p class="eyebrow">SELECTED WORK</p><h2>Featured projects</h2><p class="hint">Click any project to see features, architecture and details.</p></div><div class="filters" role="group" aria-label="Filter projects"><button class="active" data-filter="all">All</button><button data-filter="software">Software</button><button data-filter="iot">IoT</button><button data-filter="hardware">Hardware</button><button data-filter="engineering">Engineering</button></div></div>
+<section id="app" class="section app-show"><div class="app-head"><img src="images/smartfarm/icon.png" alt="Smart Farm app icon" width="88" height="88"><div><p class="eyebrow">MOBILE APP • ANDROID STUDIO</p><h2>Smart Farm for Android</h2></div></div>
+<div class="app-intro"><p class="copy">An Android app that controls an ESP32 smart farm on home Wi-Fi: grow lights, a water pump, sensor readings, automation rules and a live ESP32-CAM camera. Built with Capacitor and Android Studio (package <code>com.nannaphat.smartfarm</code>). GitHub Actions builds a new APK on every push, and the project has a Google Play signing pipeline.</p>
+<ul class="app-facts"><li><strong>8</strong><span>screens</span></li><li><strong>APK + AAB</strong><span>Android builds</span></li><li><strong>ESP32-CAM</strong><span>live camera</span></li><li><strong>Thai UI</strong><span>Kanit font</span></li></ul>
+<div class="actions"><a class="btn primary" href="https://github.com/Nannaphat31108/Smartfarm" target="_blank" rel="noreferrer">Source code ↗</a><a class="btn" href="https://github.com/Nannaphat31108/Smartfarm/releases/tag/android-latest" target="_blank" rel="noreferrer">Download APK ↗</a></div></div>
+<div class="phones" id="phones" tabindex="0" aria-label="Smart Farm app screenshots"></div>
+<p class="hint">Scroll sideways to see all screens · click a screen to enlarge</p>
+</section>
+
+<section id="projects" class="section"><div class="section-head"><div><p class="eyebrow">SELECTED WORK</p><h2>Featured projects</h2><p class="hint">Click any project to see features, architecture and details.</p></div><div class="filters" role="group" aria-label="Filter projects"><button class="active" data-filter="all">All</button><button data-filter="software">Software</button><button data-filter="mobile">Mobile</button><button data-filter="iot">IoT</button><button data-filter="hardware">Hardware</button><button data-filter="engineering">Engineering</button></div></div>
 <div class="projects" id="project-list"></div>
 <noscript><p>Enable JavaScript to see the project list, or visit <a href="https://github.com/Nannaphat31108">github.com/Nannaphat31108</a>.</p></noscript>
 </section>
@@ -67,6 +75,7 @@
 </main>
 <footer><span>© <span id="year"></span> Nannaphat Chalom</span><span>Designed &amp; built with curiosity.</span></footer>
 
+<dialog id="viewer" class="viewer" aria-label="Screenshot"><button class="close" aria-label="Close">✕</button><img alt=""><p></p></dialog>
 <dialog id="detail" aria-labelledby="d-title"><button class="close" aria-label="Close">✕</button><div id="detail-body"></div></dialog>
 <script src="script.js"></script>
 </body></html>

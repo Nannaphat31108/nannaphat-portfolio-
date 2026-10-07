@@ -10,7 +10,7 @@ Enable GitHub Pages from **Settings → Pages → Deploy from a branch → main 
 - Digital Ship Inspection & Engineering Analysis System
 - Hospital Purchase System — 8 government-format Word forms
 - Laundry Management System — PWA POS with thermal printing
-- Smart Farm — ESP32 / ESP32-CAM control app + Android APK
+- Smart Farm — Android app (Android Studio + Capacitor) for ESP32 / ESP32-CAM, with screenshots in `images/smartfarm`
 - Smart Water — ESP32 irrigation with FastAPI
 - Smart Plant Cloud — IoT sensor & image backend
 - PowerBox SOS — LoRa + GPS emergency communicator

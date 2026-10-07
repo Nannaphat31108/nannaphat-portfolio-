@@ -1,4 +1,5 @@
 const GH='https://github.com/Nannaphat31108/';
+const SF_SHOTS=[['welcome','Welcome'],['home','Home dashboard'],['devices','Devices'],['light','Grow lights'],['pump','Water pump'],['auto','Automation rules'],['camera','ESP32-CAM camera'],['data','Sensor history']].map(([f,t])=>({src:'images/smartfarm/'+f+'.webp',title:t}));
 const PROJECTS=[
 {id:'lifeplus',title:'Life Plus ERP',tag:'ERP • BUSINESS SYSTEM',cat:['software'],featured:true,
  summary:'Multi-department ERP for a pharmaceutical / supplement manufacturer — R&D formulas, purchasing, packaging, stock, production work orders and document exports, backed by PostgreSQL.',
@@ -32,14 +33,15 @@ const PROJECTS=[
  features:['Home dashboard: today vs. yesterday revenue, 7-day chart, customers whose packages are running out','Order screen: charge per piece (tap cards) or per kg, auto-deduct from prepaid packages','Customer management with search by name / phone / LINE ID and package status filters','Packages with price-per-piece and active-customer counts','Receipts: date filter, reprint (80 / 58 mm), void and delete','Accounts: income & expenses, monthly charts, categories, CSV export, A4 summary report','Admin PIN (hashed) protects sensitive actions; auto-locks when idle','Print via browser, USB, Bluetooth LE or RawBT; auto-cut, cash-drawer kick, multi-copy','Multi-device sync through Firebase Realtime Database'],
  role:'Rebuilt the whole UX/UI of an older system and wrote the receipt renderer and printer drivers in plain JavaScript.',
  links:[['Repository',GH+'Laundry']]},
-{id:'smartfarm',title:'Smart Farm',tag:'IOT • MOBILE APP',cat:['iot','hardware','software'],
+{id:'smartfarm',title:'Smart Farm',tag:'ANDROID APP • IOT',cat:['mobile','iot','hardware','software'],featured:true,
+ images:SF_SHOTS,icon:'images/smartfarm/icon.png',
  summary:'Control a smart farm from your phone — grow lights, water pump, sensors, automation rules and a live ESP32-CAM camera. Ships as a web app, PWA and Android APK.',
  chips:['ESP32','ESP32-CAM','Capacitor','Android','GitHub Actions'],
  stats:[['8','screens'],['APK','auto-built'],['24h / 7d','sensor history']],
  overview:'A static web app that talks directly to ESP32 boards on the home Wi-Fi. Every push to main triggers GitHub Actions to build a new Android APK, and the project includes a Google Play release pipeline.',
  features:['Live temperature, air humidity and soil moisture','Device list with search and filters; relay on/off switches','Grow lights by schedule, by light level, or manual','Water pump with soil-moisture gauge and adjustable auto-watering threshold','Automation rules: time, soil moisture, low light, high temperature','ESP32-CAM: live view, snapshot, flash, resolution, time-lapse and gallery','History charts for 24 hours and 7 days','Android APK via Capacitor + CI; Google Play AAB signing guide; privacy policy page'],
  role:'Wrote the app, the ESP32-CAM firmware and the CI pipeline that builds and publishes the Android app.',
- links:[['Repository',GH+'Smartfarm']]},
+ links:[['Repository',GH+'Smartfarm'],['Download APK',GH+'Smartfarm/releases/tag/android-latest']]},
 {id:'smartwater',title:'Smart Water',tag:'IOT • AUTOMATION',cat:['iot','hardware'],
  summary:'ESP32 smart irrigation — soil-moisture sensing, automatic watering by threshold, manual pump control and a cloud dashboard.',
  chips:['ESP32','FastAPI','Sensors','Render'],
@@ -90,19 +92,25 @@ const PROJECTS=[
  links:[['Repository',GH+'StoneCraftCafe']]}
 ];
 
+const shotsHTML=imgs=>imgs.map(m=>`<figure class="phone"><button data-src="${m.src}" data-title="${m.title}"><img src="${m.src}" alt="${m.title}" loading="lazy" width="540" height="1169"></button><figcaption>${m.title}</figcaption></figure>`).join('');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const list=document.getElementById('project-list');
-list.innerHTML=PROJECTS.map((p,i)=>`<article class="project${p.featured?' featured':''}" data-cat="${p.cat.join(' ')}" data-id="${p.id}" tabindex="0" role="button" aria-label="Details: ${esc(p.title)}"><div class="num">${String(i+1).padStart(2,'0')}</div><div><p class="tag">${p.tag}</p><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p><div class="chips">${p.chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div></div><span class="more">Details →</span></article>`).join('');
+list.innerHTML=PROJECTS.map((p,i)=>`<article class="project${p.featured?' featured':''}" data-cat="${p.cat.join(' ')}" data-id="${p.id}" tabindex="0" role="button" aria-label="Details: ${esc(p.title)}"><div class="num">${String(i+1).padStart(2,'0')}</div><div>${p.images?`<div class="thumbs">${p.images.slice(1,5).map(m=>`<img src="${m.src}" alt="${esc(m.title)}" loading="lazy" width="54" height="117">`).join('')}</div>`:''}<p class="tag">${p.tag}</p><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p><div class="chips">${p.chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div></div><span class="more">Details →</span></article>`).join('');
 
 const dlg=document.getElementById('detail'),body=document.getElementById('detail-body');
 function openProject(id){const p=PROJECTS.find(x=>x.id===id);if(!p)return;
- body.innerHTML=`<p class="tag">${p.tag}</p><h2 id="d-title">${esc(p.title)}</h2><div class="d-stats">${p.stats.map(([n,l])=>`<div><strong>${esc(n)}</strong><span>${esc(l)}</span></div>`).join('')}</div><p class="d-lead">${esc(p.overview)}</p><h4>Key features</h4><ul>${p.features.map(f=>`<li>${esc(f)}</li>`).join('')}</ul><h4>My role</h4><p>${esc(p.role)}</p><h4>Tech</h4><div class="chips">${p.chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div><div class="actions d-links">${p.links.map(([t,u],i)=>`<a class="btn${i?'':' primary'}" href="${u}" target="_blank" rel="noreferrer">${esc(t)} ↗</a>`).join('')}</div>`;
+ body.innerHTML=`<p class="tag">${p.tag}</p><h2 id="d-title">${esc(p.title)}</h2><div class="d-stats">${p.stats.map(([n,l])=>`<div><strong>${esc(n)}</strong><span>${esc(l)}</span></div>`).join('')}</div><p class="d-lead">${esc(p.overview)}</p>${p.images?`<h4>Screens</h4><div class="phones small">${shotsHTML(p.images)}</div>`:''}<h4>Key features</h4><ul>${p.features.map(f=>`<li>${esc(f)}</li>`).join('')}</ul><h4>My role</h4><p>${esc(p.role)}</p><h4>Tech</h4><div class="chips">${p.chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div><div class="actions d-links">${p.links.map(([t,u],i)=>`<a class="btn${i?'':' primary'}" href="${u}" target="_blank" rel="noreferrer">${esc(t)} ↗</a>`).join('')}</div>`;
  dlg.showModal();dlg.scrollTop=0;}
 list.addEventListener('click',e=>{const a=e.target.closest('.project');if(a)openProject(a.dataset.id)});
 list.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.project')){e.preventDefault();openProject(e.target.dataset.id)}});
 dlg.querySelector('.close').addEventListener('click',()=>dlg.close());
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
 
+document.getElementById('phones').innerHTML=shotsHTML(SF_SHOTS);
+const viewer=document.getElementById('viewer');
+document.addEventListener('click',e=>{const b=e.target.closest('.phone button');if(!b)return;viewer.querySelector('img').src=b.dataset.src;viewer.querySelector('img').alt=b.dataset.title;viewer.querySelector('p').textContent=b.dataset.title;viewer.showModal();});
+viewer.querySelector('.close').addEventListener('click',()=>viewer.close());
+viewer.addEventListener('click',e=>{if(e.target===viewer)viewer.close()});
 document.getElementById('year').textContent=new Date().getFullYear();
 const buttons=document.querySelectorAll('[data-filter]'),projects=document.querySelectorAll('.project');
 buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;projects.forEach(p=>p.classList.toggle('hidden',f!=='all'&&!p.dataset.cat.split(' ').includes(f)));}));
