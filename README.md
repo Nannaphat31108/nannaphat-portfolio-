@@ -10,6 +10,7 @@ Enable GitHub Pages from **Settings → Pages → Deploy from a branch → main 
 - Digital Ship Inspection & Engineering Analysis System
 - Hospital Purchase System — 8 government-format Word forms
 - Laundry Management System — PWA POS with thermal printing
+- 4Her Electric — native Android app (Java + SQLite) for an appliance shop, screenshots in `images/4her`
 - Smart Farm — Android app (Android Studio + Capacitor) for ESP32 / ESP32-CAM, with screenshots in `images/smartfarm`
 - Smart Water — ESP32 irrigation with FastAPI
 - Smart Plant Cloud — IoT sensor & image backend

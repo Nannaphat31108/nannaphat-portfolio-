@@ -1,6 +1,16 @@
 const GH='https://github.com/Nannaphat31108/';
 const SF_SHOTS=[['welcome','Welcome'],['home','Home dashboard'],['devices','Devices'],['light','Grow lights'],['pump','Water pump'],['auto','Automation rules'],['camera','ESP32-CAM camera'],['data','Sensor history']].map(([f,t])=>({src:'images/smartfarm/'+f+'.webp',title:t}));
+const HE_SHOTS=[['login','Login'],['admin_home','Admin home'],['shop','Customer shop'],['cart','Cart & checkout'],['tables','Database tables'],['product_form','Product form'],['salary_query','Salary query'],['stock_query','Stock query'],['salary_report','Salary report'],['stock_report','Stock report'],['register','Sign up']].map(([f,t])=>({src:'images/4her/'+f+'.webp',title:t}));
 const PROJECTS=[
+{id:'4her',title:'4Her Electric',tag:'ANDROID APP • DATABASE',cat:['mobile','software'],featured:true,
+ images:HE_SHOTS,
+ summary:'Native Android app (Java, Android Studio) for an electrical-appliance shop: an SQLite database of employees, products, categories and sales, plus a customer shop with cart and orders.',
+ chips:['Java','Android Studio','SQLite','Material Design'],
+ stats:[['16','activities'],['32','layouts'],['6.4k','lines of Java']],
+ overview:'One app with two sides. Staff and admins work with the shop database: data-entry forms, queries, Make Table, and printable reports. Customers sign up, browse products by category, check out a cart and follow their orders. Every customer order is also written to the sales table, so the stock and sales reports stay up to date.',
+ features:['Login with PBKDF2-hashed passwords, "remember me", and a 30-second lock after 5 failed attempts','Three roles (admin, staff, customer); admins manage user accounts','Record forms for employees, products, categories and sales, with first / prev / next / last navigation, add, save, edit, delete and search','Database tables viewer with Datasheet and Design views','Salary query that works out social security (5%, capped at ฿750) and net pay, with a Make Table option','Stock query that works out remaining stock from sales and flags low-stock items','Salary report by department and stock report by category, which can be printed or saved as PDF','Customer shop with category filters, product photos, cart, shipping details and order status (pending, shipped, done, cancelled)','Seed data: 20 employees, 32 products, 4 categories'],
+ role:'Designed the database and wrote the whole app in Java: the SQLite helper and repositories, 16 activities, 32 XML layouts, a navy-and-gold Material theme, and the report printer.',
+ links:[]},
 {id:'lifeplus',title:'Life Plus ERP',tag:'ERP • BUSINESS SYSTEM',cat:['software'],featured:true,
  summary:'Multi-department ERP for a pharmaceutical / supplement manufacturer — R&D formulas, purchasing, packaging, stock, production work orders and document exports, backed by PostgreSQL.',
  chips:['FastAPI','PostgreSQL','JavaScript','Excel','Render'],
@@ -99,7 +109,7 @@ list.innerHTML=PROJECTS.map((p,i)=>`<article class="project${p.featured?' featur
 
 const dlg=document.getElementById('detail'),body=document.getElementById('detail-body');
 function openProject(id){const p=PROJECTS.find(x=>x.id===id);if(!p)return;
- body.innerHTML=`<p class="tag">${p.tag}</p><h2 id="d-title">${esc(p.title)}</h2><div class="d-stats">${p.stats.map(([n,l])=>`<div><strong>${esc(n)}</strong><span>${esc(l)}</span></div>`).join('')}</div><p class="d-lead">${esc(p.overview)}</p>${p.images?`<h4>Screens</h4><div class="phones small">${shotsHTML(p.images)}</div>`:''}<h4>Key features</h4><ul>${p.features.map(f=>`<li>${esc(f)}</li>`).join('')}</ul><h4>My role</h4><p>${esc(p.role)}</p><h4>Tech</h4><div class="chips">${p.chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div><div class="actions d-links">${p.links.map(([t,u],i)=>`<a class="btn${i?'':' primary'}" href="${u}" target="_blank" rel="noreferrer">${esc(t)} ↗</a>`).join('')}</div>`;
+ body.innerHTML=`<p class="tag">${p.tag}</p><h2 id="d-title">${esc(p.title)}</h2><div class="d-stats">${p.stats.map(([n,l])=>`<div><strong>${esc(n)}</strong><span>${esc(l)}</span></div>`).join('')}</div><p class="d-lead">${esc(p.overview)}</p>${p.images?`<h4>Screens</h4><div class="phones small">${shotsHTML(p.images)}</div>`:''}<h4>Key features</h4><ul>${p.features.map(f=>`<li>${esc(f)}</li>`).join('')}</ul><h4>My role</h4><p>${esc(p.role)}</p><h4>Tech</h4><div class="chips">${p.chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div>${p.links.length?'':'<p class="muted-note">Source code available on request.</p>'}<div class="actions d-links">${p.links.map(([t,u],i)=>`<a class="btn${i?'':' primary'}" href="${u}" target="_blank" rel="noreferrer">${esc(t)} ↗</a>`).join('')}</div>`;
  dlg.showModal();dlg.scrollTop=0;}
 list.addEventListener('click',e=>{const a=e.target.closest('.project');if(a)openProject(a.dataset.id)});
 list.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.project')){e.preventDefault();openProject(e.target.dataset.id)}});
@@ -107,6 +117,8 @@ dlg.querySelector('.close').addEventListener('click',()=>dlg.close());
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
 
 document.getElementById('phones').innerHTML=shotsHTML(SF_SHOTS);
+document.getElementById('phones-4her').innerHTML=shotsHTML(HE_SHOTS);
+document.querySelectorAll('[data-open]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openProject(a.dataset.open)}));
 const viewer=document.getElementById('viewer');
 document.addEventListener('click',e=>{const b=e.target.closest('.phone button');if(!b)return;viewer.querySelector('img').src=b.dataset.src;viewer.querySelector('img').alt=b.dataset.title;viewer.querySelector('p').textContent=b.dataset.title;viewer.showModal();});
 viewer.querySelector('.close').addEventListener('click',()=>viewer.close());
