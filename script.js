@@ -1,8 +1,24 @@
 const GH='https://github.com/Nannaphat31108/';
 const SF_SHOTS=[['welcome','Welcome'],['home','Home dashboard'],['devices','Devices'],['light','Grow lights'],['pump','Water pump'],['auto','Automation rules'],['camera','ESP32-CAM camera'],['data','Sensor history']].map(([f,t])=>({src:'images/smartfarm/'+f+'.webp',title:t}));
 const HE_SHOTS=[['login','Login'],['admin_home','Admin home'],['shop','Customer shop'],['cart','Cart & checkout'],['tables','Database tables'],['product_form','Product form'],['salary_query','Salary query'],['stock_query','Stock query'],['salary_report','Salary report'],['stock_report','Stock report'],['register','Sign up']].map(([f,t])=>({src:'images/4her/'+f+'.webp',title:t}));
+
+const WS=(d,list)=>list.map(([f,t])=>({src:'images/'+d+'/'+f+'.webp',title:t,wide:true}));
+const WEB={
+ lifeplus:WS('lifeplus',[['01-login','Login'],['02-departments','Choose department'],['03-rd-home','R&D workspace'],['04-formula-form','F-RD-002 formula form'],['05-formula-db','Formula database'],['06-raw-materials','Raw materials'],['07-registration-fda','Registration / FDA'],['08-admin','Admin'],['09-planning','Planning / MRP'],['10-stock','Stock'],['11-purchase','Purchasing'],['12-ceo','CEO dashboard']]),
+ dsis:WS('dsis',[['01-dashboard','Engineering dashboard'],['02-ship','Ship particulars'],['03-findings','Inspection findings'],['04-assessment','Damage assessment'],['05-stability','Stability simulation'],['06-report','Inspection report']]),
+ hospital:WS('hospital',[['01-dashboard','Dashboard'],['02-purchases','Purchase orders'],['03-new-purchase','New purchase order'],['04-items','Medical supplies']]),
+ laundry:WS('laundry',[['01-home','Home'],['02-order','New order / checkout'],['03-customers','Customers'],['04-packages','Packages'],['05-receipts','Receipts'],['06-accounts','Accounts'],['07-printer','Printer setup']]),
+ smartwater:WS('smartwater',[['01-dashboard','Watering dashboard']]),
+ plantcloud:WS('plantcloud',[['01-dashboard','Plant dashboard']]),
+ powerbox:WS('powerbox',[['01-sos-dashboard','SOS map dashboard']]),
+ charger:WS('powerbox',[['02-charger-home','Charger home'],['03-schematic','Schematic'],['04-pcb','PCB layout'],['05-3d','3D view'],['06-bom','Bill of materials'],['07-solder','Soldering table'],['08-build','Assembly guide'],['09-code','Arduino code']]),
+ schoolroom:WS('schoolroom',[['01-login','Login'],['02-register','Sign up'],['03-home','Choose building'],['04-building','Rooms in a building'],['05-booking','Book a room'],['06-bookings','My bookings']]),
+ stonecraft:WS('stonecraft',[['01-home','Home'],['02-menu','Menu'],['04-workshops','Workshops'],['05-about','About'],['06-contact','Contact & map'],['07-admin-login','Admin login'],['08-admin-dashboard','Admin dashboard'],['09-admin-menu','Manage menu'],['10-admin-reservations','Reservations']]),
+ condo:WS('condo',[['01-login','Login'],['02-dashboard','Overview'],['03-units','Units / residents'],['04-charges','Charge settings'],['05-meters','Meter readings'],['06-sheet','Fill in all charges'],['07-invoices','Invoices / payments'],['08-payments','Bulk payments'],['09-reports','Reports'],['10-expenses','Income & expenses'],['12-resident','Resident view']])
+};
+const RENDER=true;
 const PROJECTS=[
-{id:'4her',title:'4Her Electric',tag:'ANDROID APP • DATABASE',cat:['mobile','software'],featured:true,
+{id:'4her',apk:'downloads/4HerElectric.apk',apkNote:true,title:'4Her Electric',tag:'ANDROID APP • DATABASE',cat:['mobile','software'],featured:true,
  images:HE_SHOTS,
  summary:'Native Android app (Java, Android Studio) for an electrical-appliance shop: an SQLite database of employees, products, categories and sales, plus a customer shop with cart and orders.',
  chips:['Java','Android Studio','SQLite','Material Design'],
@@ -11,7 +27,7 @@ const PROJECTS=[
  features:['Login with PBKDF2-hashed passwords, "remember me", and a 30-second lock after 5 failed attempts','Three roles (admin, staff, customer); admins manage user accounts','Record forms for employees, products, categories and sales, with first / prev / next / last navigation, add, save, edit, delete and search','Database tables viewer with Datasheet and Design views','Salary query that works out social security (5%, capped at ฿750) and net pay, with a Make Table option','Stock query that works out remaining stock from sales and flags low-stock items','Salary report by department and stock report by category, which can be printed or saved as PDF','Customer shop with category filters, product photos, cart, shipping details and order status (pending, shipped, done, cancelled)','Seed data: 20 employees, 32 products, 4 categories'],
  role:'Designed the database and wrote the whole app in Java: the SQLite helper and repositories, 16 activities, 32 XML layouts, a navy-and-gold Material theme, and the report printer.',
  links:[]},
-{id:'lifeplus',title:'Life Plus ERP',tag:'ERP • BUSINESS SYSTEM',cat:['software'],featured:true,
+{id:'lifeplus',web:WEB.lifeplus,live:'https://rd-erp-ai.onrender.com',sleep:true,title:'Life Plus ERP',tag:'ERP • BUSINESS SYSTEM',cat:['software'],featured:true,
  summary:'Multi-department ERP for a pharmaceutical / supplement manufacturer — R&D formulas, purchasing, packaging, stock, production work orders and document exports, backed by PostgreSQL.',
  chips:['FastAPI','PostgreSQL','JavaScript','Excel','Render'],
  stats:[['15k+','lines of code'],['23','API modules'],['v31','releases']],
@@ -19,7 +35,15 @@ const PROJECTS=[
  features:['R&D formula forms (F-RD-002 / 002.1) with live cost, profit and price-rate calculation','Composite-ingredient expansion for substances registered as multiple components','FDA material & supplement code lookup for regulatory data','Purchasing documents (PR / PO), quotations and admin pricing','Packaging options, packaging preparation and finished-goods stock cards','Production work orders, MRP service and work hand-off between departments','Audit log & version history on records; Excel export of every form','Login with roles; deployable to Render with a custom domain'],
  role:'Designed the data model, wrote the FastAPI backend and the 6,000-line vanilla-JS front end, and mapped every original Excel field to the database (documented in FORM_MAPPING.md).',
  links:[['Repository',GH+'lifeplusrepo']]},
-{id:'dsis',title:'Digital Ship Inspection System',tag:'ENGINEERING • WEB APP',cat:['engineering','software'],
+{id:'condo',web:WEB.condo,title:'Condo Management System',tag:'PROPERTY • BILLING',cat:['software'],featured:true,
+ summary:'Billing system for a condominium or village juristic office: water, electricity, common fees and other charges are calculated for every unit, with invoices, receipts, payments, expenses and resident logins.',
+ chips:['Flask','SQLite','Python','A4 printing','pytest'],
+ stats:[['6.7k','lines of code'],['28','passing tests'],['31','admin pages']],
+ overview:'The office used to work out every unit\'s bill by hand. Now staff record meter readings once and the system issues invoices for the whole building in one click. Each bill keeps its own copy of the rates and meter numbers, so changing a price later never changes old bills.',
+ features:['Every charge has its own pricing rule: metered flat rate with a minimum, stepped meter rates, flat per unit, or per square metre, plus VAT and service fees','Charges can be monthly, yearly or one-off, and apply to all units or only selected ones','Meter readings for water and electricity, with the previous and current numbers printed on the bill','Issue invoices for a whole period at once; units without a meter reading are held back to avoid wrong bills','Invoice and receipt numbers run per month (0001/10/2026), printable one or two per A4 sheet','Record payments for many units on one page, full or partial, and print every receipt at once','Expenses (common electricity, salaries, repairs) with daily, monthly and yearly income-and-expense summaries','Reports by month, by charge type and by payment channel, plus a list of overdue units; CSV export and database backup','Separate owner and tenant details; create hundreds of units by floor or import from CSV','Residents log in to see only their own bills, receipts and water/electricity history'],
+ role:'Wrote the whole system in Flask with a single-file SQLite database, the billing engine, the A4 invoice and receipt layouts, and a test suite of 28 tests that all pass.',
+ links:[['Repository',GH+'Condo']]},
+{id:'dsis',web:WEB.dsis,live:'demos/dsis/',demo:true,title:'Digital Ship Inspection System',tag:'ENGINEERING • WEB APP',cat:['engineering','software'],
  summary:'Ship inspection, structural damage assessment and preliminary stability simulation — with engineering calculations, hand-drawn SVG visualizations and automated tests.',
  chips:['JavaScript','SVG','Naval Engineering','Unit Tests'],
  stats:[['3','modules'],['28','passing tests'],['0','dependencies']],
@@ -27,7 +51,7 @@ const PROJECTS=[
  features:['Module 1 — Ship particulars with input validation and IMO check-digit verification','Click on the SVG hull to place findings; system detects zone (Aft / Midship 0.4L / Forward) and above/below waterline','Findings table with search, filters, 6 sort modes, detail view and delete confirmation','Module 2 — Plate-thickness loss (Δt, Δt%, t_min), damage score, severity and recommendations','Module 3 — Volume, displacement, KB, BM, GM and GZ curve checked against IMO criteria','Dashboard with KPI, donut / bar / line charts written from scratch in SVG','Auto-generated inspection report → Print / Save as PDF','Pure calculation modules tested with Node.js: 28 passed, 0 failed'],
  role:'Researched the formulas, separated pure calculation logic from the UI so it can be unit-tested, and built every chart and diagram by hand.',
  links:[['Repository',GH+'DIGITAL-SHIP-INSPECTION-SYSTEM']]},
-{id:'hospital',title:'Hospital Purchase System',tag:'HEALTHCARE • DATABASE',cat:['software'],
+{id:'hospital',web:WEB.hospital,title:'Hospital Purchase System',tag:'HEALTHCARE • DATABASE',cat:['software'],
  summary:'Hospital procurement workflow — companies, medical supplies, units, purchase orders, search, back-dated editing and official government-format Word exports.',
  chips:['Flask','PostgreSQL','SQLAlchemy','python-docx'],
  stats:[['8','Word forms'],['4','versions'],['6k+','lines of code']],
@@ -35,7 +59,7 @@ const PROJECTS=[
  features:['Manage companies, medical supplies and units (add / edit / search / enable / disable)','Purchase orders with 1–6+ items; prices, units and specs filled in automatically','8 official Word forms in TH Sarabun New 16 pt — single / multi-item PO, specification, inspection receipt and more','Back-dated creation and editing of historical purchases','Print every form at once','Data persists across redeploys on Render PostgreSQL (no drop_all, safe create_all)','Falls back to local SQLite for offline use on Windows'],
  role:'Iterated through four versions with the users, matching the Word layouts line-by-line to the official templates.',
  links:[['Repository',GH+'hospital-purchase-system-final'],['Earlier v2',GH+'hospital-purchase-system-v2']]},
-{id:'laundry',title:'Laundry Management System',tag:'PWA • POS',cat:['software','hardware'],
+{id:'laundry',web:WEB.laundry,live:'demos/laundry/',demo:true,title:'Laundry Management System',tag:'PWA • POS',cat:['software','hardware'],
  summary:'Laundry-shop POS and management PWA — orders by piece or weight, prepaid packages, accounting, and Thai receipts printed directly to a thermal printer.',
  chips:['PWA','JavaScript','Firebase','ESC/POS','Web Bluetooth'],
  stats:[['8','app screens'],['80mm','thermal receipts'],['100%','offline']],
@@ -43,7 +67,7 @@ const PROJECTS=[
  features:['Home dashboard: today vs. yesterday revenue, 7-day chart, customers whose packages are running out','Order screen: charge per piece (tap cards) or per kg, auto-deduct from prepaid packages','Customer management with search by name / phone / LINE ID and package status filters','Packages with price-per-piece and active-customer counts','Receipts: date filter, reprint (80 / 58 mm), void and delete','Accounts: income & expenses, monthly charts, categories, CSV export, A4 summary report','Admin PIN (hashed) protects sensitive actions; auto-locks when idle','Print via browser, USB, Bluetooth LE or RawBT; auto-cut, cash-drawer kick, multi-copy','Multi-device sync through Firebase Realtime Database'],
  role:'Rebuilt the whole UX/UI of an older system and wrote the receipt renderer and printer drivers in plain JavaScript.',
  links:[['Repository',GH+'Laundry']]},
-{id:'smartfarm',title:'Smart Farm',tag:'ANDROID APP • IOT',cat:['mobile','iot','hardware','software'],featured:true,
+{id:'smartfarm',apk:'https://github.com/Nannaphat31108/Smartfarm/releases/download/android-latest/SmartFarm.apk',live:'demos/smartfarm/',demo:true,title:'Smart Farm',tag:'ANDROID APP • IOT',cat:['mobile','iot','hardware','software'],featured:true,
  images:SF_SHOTS,icon:'images/smartfarm/icon.png',
  summary:'Control a smart farm from your phone — grow lights, water pump, sensors, automation rules and a live ESP32-CAM camera. Ships as a web app, PWA and Android APK.',
  chips:['ESP32','ESP32-CAM','Capacitor','Android','GitHub Actions'],
@@ -51,8 +75,8 @@ const PROJECTS=[
  overview:'A static web app that talks directly to ESP32 boards on the home Wi-Fi. Every push to main triggers GitHub Actions to build a new Android APK, and the project includes a Google Play release pipeline.',
  features:['Live temperature, air humidity and soil moisture','Device list with search and filters; relay on/off switches','Grow lights by schedule, by light level, or manual','Water pump with soil-moisture gauge and adjustable auto-watering threshold','Automation rules: time, soil moisture, low light, high temperature','ESP32-CAM: live view, snapshot, flash, resolution, time-lapse and gallery','History charts for 24 hours and 7 days','Android APK via Capacitor + CI; Google Play AAB signing guide; privacy policy page'],
  role:'Wrote the app, the ESP32-CAM firmware and the CI pipeline that builds and publishes the Android app.',
- links:[['Repository',GH+'Smartfarm'],['Download APK',GH+'Smartfarm/releases/tag/android-latest']]},
-{id:'smartwater',title:'Smart Water',tag:'IOT • AUTOMATION',cat:['iot','hardware'],
+ links:[['Repository',GH+'Smartfarm'],['All releases',GH+'Smartfarm/releases/tag/android-latest']]},
+{id:'smartwater',web:WEB.smartwater,title:'Smart Water',tag:'IOT • AUTOMATION',cat:['iot','hardware'],
  summary:'ESP32 smart irrigation — soil-moisture sensing, automatic watering by threshold, manual pump control and a cloud dashboard.',
  chips:['ESP32','FastAPI','Sensors','Render'],
  stats:[['2-way','device ↔ cloud'],['Auto','threshold mode']],
@@ -60,7 +84,7 @@ const PROJECTS=[
  features:['Soil moisture in % plus raw sensor value and sensor-health flag','Automatic mode waters when moisture drops below an adjustable threshold','Manual pump on/off commands with command IDs to avoid repeats','Device authentication with an X-Device-Key header','Last-seen timestamp to detect an offline device','Web dashboard served by the same API'],
  role:'Designed the polling protocol between the board and the server and wrote both sides.',
  links:[['Repository',GH+'smartwater']]},
-{id:'plantcloud',title:'Smart Plant Cloud',tag:'IOT • CLOUD • IMAGE',cat:['iot','software'],
+{id:'plantcloud',web:WEB.plantcloud,live:'https://smart-plant-cloud.onrender.com',sleep:true,title:'Smart Plant Cloud',tag:'IOT • CLOUD • IMAGE',cat:['iot','software'],
  summary:'Cloud backend for plant monitoring — devices upload soil readings, plant photos and pump events, which are stored and analysed in PostgreSQL.',
  chips:['Flask','PostgreSQL','NumPy','Pillow'],
  stats:[['10','API endpoints'],['3','data types']],
@@ -68,7 +92,7 @@ const PROJECTS=[
  features:['POST /api/soil — raw and percent soil moisture per device ID','POST /api/image — plant photos (up to 6 MB) processed with NumPy / Pillow','Pump event log and history','Latest-value and history endpoints for dashboards','Health and status endpoints for monitoring','Works with SQLite locally or PostgreSQL in the cloud'],
  role:'Built the data model and API that later IoT projects reuse.',
  links:[['Repository',GH+'smart-plant-cloud']]},
-{id:'powerbox',title:'PowerBox SOS',tag:'LORA • EMBEDDED',cat:['iot','hardware'],
+{id:'powerbox',web:WEB.powerbox,title:'PowerBox SOS',tag:'LORA • EMBEDDED',cat:['iot','hardware'],
  summary:'Offline emergency communication — an ESP32 transmitter sends SOS + GPS over LoRa; a receiver shows it on an OLED and forwards it to a live map dashboard.',
  chips:['ESP32','LoRa SX1278','GPS NEO-6M','Flask','OpenStreetMap'],
  stats:[['433 MHz','LoRa radio'],['3','components']],
@@ -76,7 +100,7 @@ const PROJECTS=[
  features:['Transmitter: ESP32 + RA-01 SX1278 + NEO-6M GPS','Receiver: ESP32 + RA-01 + SSD1306 OLED + Wi-Fi','Receiver forwards messages over HTTPS to /api/sos','Flask + SQLAlchemy dashboard with OpenStreetMap markers','Full wiring documentation for every pin','Deployable to Render with PostgreSQL'],
  role:'Wired and programmed both radios and built the web dashboard.',
  links:[['Repository',GH+'powerbox']]},
-{id:'charger',title:'Smart Battery Charger',tag:'PCB • HARDWARE',cat:['hardware','engineering'],
+{id:'charger',web:WEB.charger,live:'demos/charger/',demo:true,title:'Smart Battery Charger',tag:'PCB • HARDWARE',cat:['hardware','engineering'],
  summary:'Stand-alone 12 V lead-acid battery charger on Arduino Nano — with schematic, 2-layer PCB layout, 3D view, BOM, soldering table and build guide.',
  chips:['Arduino Nano','PCB Design','Proteus','Python'],
  stats:[['2-layer','PCB'],['9','doc pages']],
@@ -84,7 +108,7 @@ const PROJECTS=[
  features:['Arduino firmware for charge control (SmartCharger.ino)','Schematic and 2-layer PCB layout pages','Interactive 3D board view','Bill of materials and soldering table','Step-by-step assembly guide','Proteus simulation guide','PCB generated from code: python design.py → pcb.json → site data'],
  role:'Designed the circuit and board, and wrote the generator that keeps code and documentation in sync.',
  links:[['Repository',GH+'powerbox/tree/main/hardware/charger']]},
-{id:'schoolroom',title:'School Room Status',tag:'WEB • SCHOOL',cat:['software'],
+{id:'schoolroom',web:WEB.schoolroom,live:'https://school-room-status.onrender.com',sleep:true,title:'School Room Status',tag:'WEB • SCHOOL',cat:['software'],
  summary:'Classroom booking & status system — students see which rooms are free and book them for today, with history, accounts and abuse protection.',
  chips:['Flask','SQLite','CSRF','Responsive'],
  stats:[['2','versions'],['0','external CDNs']],
@@ -92,7 +116,7 @@ const PROJECTS=[
  features:['Book rooms for the current day; queue resets automatically each day','Full booking history kept in SQLite','Cancel only your own booking; soft cancel (status=cancelled) instead of DELETE','Unique database index prevents double-booking the same room','CSRF protection and validation of room, time and inputs','Login / register; Asia/Bangkok time zone','Responsive white UI with in-project SVG icons — no Bootstrap or CDN','Automatic migration from the v1 database'],
  role:'Rewrote v1 into v2 with security and data-integrity in mind.',
  links:[['Repository',GH+'schoolroom'],['Version 1',GH+'school-room-status']]},
-{id:'stonecraft',title:'StoneCraft Cafe',tag:'WEB • HOSPITALITY',cat:['software'],
+{id:'stonecraft',web:WEB.stonecraft,title:'StoneCraft Cafe',tag:'WEB • HOSPITALITY',cat:['software'],
  summary:'Bilingual cafe website with menu, gallery, table reservations, reviews, workshop info and a full admin panel.',
  chips:['Flask','PostgreSQL','TH / EN','Admin CMS'],
  stats:[['2','languages'],['6','admin pages']],
@@ -108,6 +132,11 @@ const TH={
  overview:'แอปนี้ใช้ได้สองฝั่ง พนักงานกับแอดมินใช้จัดการฐานข้อมูลของร้าน มีฟอร์มกรอกข้อมูล Query, Make Table และรายงานที่สั่งพิมพ์ได้ ส่วนลูกค้าเข้ามาสมัครสมาชิก เลือกของตามหมวด กดสั่งจากตะกร้า แล้วตามดูสถานะออเดอร์ ทุกออเดอร์ของลูกค้าจะถูกบันทึกเป็นยอดขายไปด้วย รายงานสต็อกกับยอดขายเลยตรงกับของจริงตลอด',
  features:['รหัสผ่านเก็บแบบเข้ารหัส PBKDF2 มีปุ่มจำการเข้าสู่ระบบ ใส่รหัสผิด 5 ครั้งจะโดนล็อก 30 วินาที','ผู้ใช้มี 3 แบบ คือ แอดมิน พนักงาน และลูกค้า แอดมินเพิ่มหรือแก้บัญชีคนอื่นได้','ฟอร์มข้อมูลพนักงาน สินค้า หมวดสินค้า และการขาย กดเลื่อนไปรายการแรก ก่อนหน้า ถัดไป สุดท้ายได้ พร้อมเพิ่ม บันทึก แก้ ลบ และค้นหา','เปิดดูตารางในฐานข้อมูลได้ทั้งแบบ Datasheet View และ Design View','Query เงินเดือน คิดประกันสังคม 5% (ไม่เกิน ฿750) กับเงินเดือนสุทธิให้ แล้วกด Make Table เก็บเป็นตารางใหม่ได้','Query Stock คิดของคงเหลือจากยอดขาย และบอกว่าตัวไหนใกล้หมด','รายงานเงินเดือนแยกแผนก กับรายงานสต็อกแยกหมวด สั่งพิมพ์หรือเซฟเป็น PDF ได้','หน้าร้านของลูกค้ามีรูปสินค้า กรองตามหมวด ใส่ตะกร้า กรอกที่อยู่ส่ง และดูสถานะ (รอดำเนินการ ส่งแล้ว สำเร็จ ยกเลิก)','มีข้อมูลตัวอย่างใส่ไว้ให้ลองเล่น พนักงาน 20 คน สินค้า 32 รายการ 4 หมวด'],
  role:'ออกแบบฐานข้อมูลและเขียนแอปเองทั้งหมดด้วย Java ตั้งแต่ส่วนที่คุยกับ SQLite, 16 หน้าจอ, 32 ไฟล์ layout, ธีมสีกรมท่าตัดทอง ไปจนถึงตัวพิมพ์รายงาน'},
+condo:{summary:'ระบบเก็บเงินของนิติบุคคลคอนโดหรือหมู่บ้าน คิดค่าน้ำ ค่าไฟ ค่าส่วนกลาง และค่าอื่น ๆ ให้ทุกห้อง ออกใบแจ้งหนี้ ใบเสร็จ รับชำระ บันทึกรายจ่าย และให้ลูกบ้านล็อกอินดูบิลของตัวเองได้',
+ stats:['บรรทัดโค้ด','test ที่ผ่าน','หน้าแอดมิน'],
+ overview:'แต่ก่อนนิติฯ ต้องนั่งคิดบิลทีละห้องเอง ตอนนี้แค่จดมิเตอร์ครั้งเดียว ระบบออกใบแจ้งหนี้ให้ทั้งตึกในคลิกเดียว บิลแต่ละใบเก็บอัตราและเลขมิเตอร์ไว้ในตัว ถ้าวันหลังแก้ราคา บิลเก่าก็ไม่เปลี่ยนตาม',
+ features:['ตั้งวิธีคิดเงินแยกได้ทุกรายการ ทั้งตามมิเตอร์อัตราเดียวพร้อมขั้นต่ำ อัตราขั้นบันได เหมาจ่ายต่อห้อง หรือคิดตามพื้นที่ บวก VAT และค่าบริการได้','ตั้งให้เก็บทุกเดือน ปีละครั้ง หรือครั้งเดียว และเลือกใช้กับทุกห้องหรือบางห้องได้','จดมิเตอร์น้ำและไฟ บิลแสดงเลขมิเตอร์ครั้งก่อนกับครั้งนี้','ออกใบแจ้งหนี้ทั้งงวดทีเดียว ห้องที่ยังไม่จดมิเตอร์จะยังไม่ออกบิล กันบิลผิด','เลขที่ใบแจ้งหนี้และใบเสร็จรันตามเดือน (0001/10/2026) พิมพ์ได้ 1 หรือ 2 ใบต่อ A4','รับชำระหลายห้องในหน้าเดียว จ่ายเต็มหรือจ่ายบางส่วนก็ได้ แล้วพิมพ์ใบเสร็จทั้งหมดทีเดียว','บันทึกรายจ่าย เช่น ไฟส่วนกลาง เงินเดือน ค่าซ่อม และดูสรุปรายรับรายจ่ายรายวัน รายเดือน รายปี','รายงานรายเดือน แยกตามประเภทค่าใช้จ่ายและช่องทางรับเงิน มีรายชื่อห้องค้างชำระ ส่งออก CSV และสำรองฐานข้อมูลได้','แยกข้อมูลเจ้าของห้องกับผู้เช่า สร้างห้องทีละหลายร้อยห้องตามชั้น หรือนำเข้าจาก CSV','ลูกบ้านล็อกอินดูได้แค่บิล ใบเสร็จ และประวัติการใช้น้ำไฟของห้องตัวเอง'],
+ role:'เขียนเองทั้งระบบด้วย Flask กับ SQLite ไฟล์เดียว ทั้งส่วนคำนวณบิล หน้าตาใบแจ้งหนี้และใบเสร็จขนาด A4 และชุด test 28 ข้อที่ผ่านทั้งหมด'},
 lifeplus:{summary:'ระบบ ERP ของบริษัทผลิตยาและอาหารเสริม ใช้ร่วมกันหลายแผนก ตั้งแต่สูตร R&D การจัดซื้อ บรรจุภัณฑ์ สต็อก ไปจนถึงใบสั่งผลิต ข้อมูลเก็บใน PostgreSQL',
  stats:['บรรทัดโค้ด','โมดูล API','เวอร์ชัน'],
  overview:'ก่อนหน้านี้บริษัทใช้ฟอร์ม Excel หลายสิบไฟล์ (F-RD-001 ถึง F-RD-004, QP, Job Master) ส่งกันไปมา เลยย้ายทั้งหมดมาอยู่ในเว็บเดียว ทุกแผนกเห็นข้อมูลชุดเดียวกัน แต่ตอนพิมพ์ออกมายังได้เอกสารหน้าตาเหมือนฟอร์มเดิมเป๊ะ คนทำงานไม่ต้องปรับตัวเยอะ',
@@ -164,30 +193,36 @@ stonecraft:{summary:'เว็บคาเฟ่สองภาษา มีเ�
  features:['มีหน้าแรก เกี่ยวกับร้าน เมนู แกลเลอรี จองโต๊ะ รีวิว และหน้าติดต่อพร้อมแผนที่','สลับไทย/อังกฤษได้ ข้อความแยกอยู่ในไฟล์แปล','ลูกค้าจองโต๊ะผ่านเว็บได้','หลังบ้านมีแดชบอร์ด จัดการเมนู อัปโหลดรูป ดูการจอง ดูรีวิว และล็อกอินแอดมิน','ข้อมูลเก็บถาวร มีสคริปต์ย้ายจาก SQLite ไป PostgreSQL','มีแอนิเมชัน และดูดีทั้งบนมือถือและคอม','รันอยู่บน Render'],
  role:'ทำเองทั้งหน้าบ้านและหลังบ้าน เจ้าของร้านจะได้แก้เว็บเองได้โดยไม่ต้องเขียนโค้ด'}
 };
-const UI={en:{details:'Details →',screens:'Screens',features:'Key features',role:'My role',tech:'Tech',onreq:'Source code available on request.',close:'Close',aria:'Details: '},
- th:{details:'ดูรายละเอียด →',screens:'หน้าจอ',features:'ฟีเจอร์หลัก',role:'ส่วนที่ลงมือทำ',tech:'เทคโนโลยี',onreq:'โค้ดยังไม่ได้เปิดสาธารณะ ถ้าอยากดูติดต่อมาได้',close:'ปิด',aria:'รายละเอียด: '}};
-const LINK_TH={'Repository':'ซอร์สโค้ด','Earlier v2':'เวอร์ชัน 2 (เดิม)','Version 1':'เวอร์ชัน 1','Download APK':'ดาวน์โหลด APK'};
-const SHOT_TH={'Welcome':'หน้าแรก','Home dashboard':'หน้าหลัก','Devices':'อุปกรณ์','Grow lights':'ไฟปลูกต้นไม้','Water pump':'ปั๊มน้ำ','Automation rules':'กฎอัตโนมัติ','ESP32-CAM camera':'กล้อง ESP32-CAM','Sensor history':'ข้อมูลเซนเซอร์','Login':'เข้าสู่ระบบ','Admin home':'หน้าแอดมิน','Customer shop':'หน้าร้านลูกค้า','Cart & checkout':'ตะกร้าสินค้า','Database tables':'ตารางฐานข้อมูล','Product form':'ฟอร์มสินค้า','Salary query':'Query เงินเดือน','Stock query':'Query Stock','Salary report':'รายงานเงินเดือน','Stock report':'รายงานสต็อก','Sign up':'สมัครสมาชิก'};
+const UI={en:{live:'Open website',apk:'Download APK',web:'Screenshots',sleep:'Hosted on Render\'s free plan, so the first visit can take about a minute to wake up.',demo:'Runs right in your browser. Any data you enter stays on your device.',nolive:'No public link yet. These screenshots come from running the code.',apknote:'Android may ask you to allow installing apps from unknown sources.',details:'Details →',screens:'Screens',features:'Key features',role:'My role',tech:'Tech',onreq:'Source code available on request.',close:'Close',aria:'Details: '},
+ th:{live:'เปิดเว็บ',apk:'ดาวน์โหลด APK',web:'ภาพหน้าจอ',sleep:'เว็บอยู่บน Render แบบฟรี ถ้าไม่มีคนเข้ามานาน ครั้งแรกอาจต้องรอประมาณ 1 นาที',demo:'เปิดใช้ในเบราว์เซอร์ได้เลย ข้อมูลที่กรอกจะเก็บอยู่ในเครื่องของคุณเอง',nolive:'ยังไม่มีลิงก์ให้ลองใช้ ภาพนี้ถ่ายจากการรันโค้ดจริง',apknote:'ตอนติดตั้ง Android อาจถามให้อนุญาตติดตั้งแอปจากแหล่งที่ไม่รู้จัก',details:'ดูรายละเอียด →',screens:'หน้าจอ',features:'ฟีเจอร์หลัก',role:'ส่วนที่ลงมือทำ',tech:'เทคโนโลยี',onreq:'โค้ดยังไม่ได้เปิดสาธารณะ ถ้าอยากดูติดต่อมาได้',close:'ปิด',aria:'รายละเอียด: '}};
+const LINK_TH={'All releases':'เวอร์ชันทั้งหมด','Repository':'ซอร์สโค้ด','Earlier v2':'เวอร์ชัน 2 (เดิม)','Version 1':'เวอร์ชัน 1','Download APK':'ดาวน์โหลด APK'};
+const SHOT_TH={'Choose department':'เลือกแผนก','R&D workspace':'หน้างาน R&D','F-RD-002 formula form':'ฟอร์มสูตร F-RD-002','Formula database':'ฐานข้อมูลสูตร','Raw materials':'วัตถุดิบ','Registration / FDA':'ทะเบียน / อย.','Admin':'แอดมิน','Planning / MRP':'วางแผนการผลิต / MRP','Stock':'สต็อก','Purchasing':'จัดซื้อ','CEO dashboard':'แดชบอร์ดผู้บริหาร','Engineering dashboard':'แดชบอร์ดวิศวกรรม','Ship particulars':'ข้อมูลเรือ','Inspection findings':'จุดที่ตรวจพบ','Damage assessment':'ประเมินความเสียหาย','Stability simulation':'จำลองการทรงตัว','Inspection report':'รายงานการตรวจ','Dashboard':'หน้าหลัก','Purchase orders':'ใบสั่งซื้อ','New purchase order':'สร้างใบสั่งซื้อ','Medical supplies':'เวชภัณฑ์','Home':'หน้าแรก','New order / checkout':'รับผ้า / คิดเงิน','Customers':'ลูกค้า','Packages':'แพ็คเกจ','Receipts':'ใบเสร็จ','Accounts':'บัญชี','Printer setup':'ตั้งค่าเครื่องพิมพ์','Watering dashboard':'แดชบอร์ดรดน้ำ','Plant dashboard':'แดชบอร์ดต้นไม้','SOS map dashboard':'แผนที่ SOS','Charger home':'หน้าแรกเครื่องชาร์จ','Schematic':'ผังวงจร','PCB layout':'ลาย PCB','3D view':'มุมมอง 3D','Bill of materials':'รายการอุปกรณ์','Soldering table':'ตารางบัดกรี','Assembly guide':'วิธีประกอบ','Arduino code':'โค้ด Arduino','Choose building':'เลือกอาคาร','Rooms in a building':'ห้องในอาคาร','Book a room':'จองห้อง','My bookings':'การจองของฉัน','Menu':'เมนู','Workshops':'เวิร์กช็อป','About':'เกี่ยวกับร้าน','Contact & map':'ติดต่อและแผนที่','Admin login':'ล็อกอินแอดมิน','Admin dashboard':'แดชบอร์ดแอดมิน','Manage menu':'จัดการเมนู','Reservations':'การจองโต๊ะ','Overview':'ภาพรวม','Units / residents':'ห้องชุด / ลูกบ้าน','Charge settings':'ตั้งค่าค่าบริการ','Meter readings':'จดมิเตอร์','Fill in all charges':'กรอกรายการทุกห้อง','Invoices / payments':'ใบแจ้งหนี้ / รับชำระ','Bulk payments':'รับชำระหลายห้อง','Reports':'รายงาน','Income & expenses':'สรุปรายรับรายจ่าย','Resident view':'หน้าของลูกบ้าน','Welcome':'หน้าแรก','Home dashboard':'หน้าหลัก','Devices':'อุปกรณ์','Grow lights':'ไฟปลูกต้นไม้','Water pump':'ปั๊มน้ำ','Automation rules':'กฎอัตโนมัติ','ESP32-CAM camera':'กล้อง ESP32-CAM','Sensor history':'ข้อมูลเซนเซอร์','Login':'เข้าสู่ระบบ','Admin home':'หน้าแอดมิน','Customer shop':'หน้าร้านลูกค้า','Cart & checkout':'ตะกร้าสินค้า','Database tables':'ตารางฐานข้อมูล','Product form':'ฟอร์มสินค้า','Salary query':'Query เงินเดือน','Stock query':'Query Stock','Salary report':'รายงานเงินเดือน','Stock report':'รายงานสต็อก','Sign up':'สมัครสมาชิก'};
 let lang='en';
 const tr=(p,k)=>lang==='th'&&TH[p.id]&&TH[p.id][k]?TH[p.id][k]:p[k];
 const sTitle=t=>lang==='th'&&SHOT_TH[t]?SHOT_TH[t]:t;
 
 const shotsHTML=imgs=>imgs.map(m=>{const t=sTitle(m.title);return `<figure class="phone"><button data-src="${m.src}" data-title="${t}"><img src="${m.src}" alt="${t}" loading="lazy" width="540" height="1169"></button><figcaption>${t}</figcaption></figure>`}).join('');
+const webHTML=imgs=>imgs.map(m=>{const t=sTitle(m.title);return `<figure class="wshot"><button data-src="${m.src}" data-title="${t}"><img src="${m.src}" alt="${t}" loading="lazy" width="1280" height="800"></button><figcaption>${t}</figcaption></figure>`}).join('');
+const actHTML=(p,u)=>`${p.live?`<a class="btn primary act" href="${p.live}" target="_blank" rel="noreferrer">${u.live} ↗</a>`:''}${p.apk?`<a class="btn act${p.live?'':' primary'}" href="${p.apk}" download>${u.apk} ↓</a>`:''}`;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const list=document.getElementById('project-list');
-function renderList(){list.innerHTML=PROJECTS.map((p,i)=>`<article class="project${p.featured?' featured':''}" data-cat="${p.cat.join(' ')}" data-id="${p.id}" tabindex="0" role="button" aria-label="${UI[lang].aria}${esc(p.title)}"><div class="num">${String(i+1).padStart(2,'0')}</div><div>${p.images?`<div class="thumbs">${p.images.slice(1,5).map(m=>`<img src="${m.src}" alt="${esc(sTitle(m.title))}" loading="lazy" width="54" height="117">`).join('')}</div>`:''}<p class="tag">${p.tag}</p><h3>${esc(p.title)}</h3><p>${esc(tr(p,'summary'))}</p><div class="chips">${p.chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div></div><span class="more">${UI[lang].details}</span></article>`).join('');}
+function renderList(){list.innerHTML=PROJECTS.map((p,i)=>`<article class="project${p.featured?' featured':''}" data-cat="${p.cat.join(' ')}" data-id="${p.id}" tabindex="0" role="button" aria-label="${UI[lang].aria}${esc(p.title)}"><div class="num">${String(i+1).padStart(2,'0')}</div><div>${p.images?`<div class="thumbs">${p.images.slice(1,5).map(m=>`<img src="${m.src}" alt="${esc(sTitle(m.title))}" loading="lazy" width="54" height="117">`).join('')}</div>`:p.web?`<img class="wthumb" src="${p.web[p.web.length>1?1:0].src}" alt="" loading="lazy" width="200" height="125">`:''}<p class="tag">${p.tag}</p><h3>${esc(p.title)}</h3><p>${esc(tr(p,'summary'))}</p><div class="chips">${p.chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div>${p.live||p.apk?`<div class="card-acts">${actHTML(p,UI[lang])}</div>`:''}</div><span class="more">${UI[lang].details}</span></article>`).join('');}
 renderList();
 
 const dlg=document.getElementById('detail'),body=document.getElementById('detail-body');
 let openId=null;
 function openProject(id){const p=PROJECTS.find(x=>x.id===id);if(!p)return;openId=id;const u=UI[lang],sl=tr(p,'stats'),stats=p.stats.map(([n,l],i)=>[n,lang==='th'&&TH[p.id]?sl[i]:l]);
- body.innerHTML=`<p class="tag">${p.tag}</p><h2 id="d-title">${esc(p.title)}</h2><div class="d-stats">${stats.map(([n,l])=>`<div><strong>${esc(n)}</strong><span>${esc(l)}</span></div>`).join('')}</div><p class="d-lead">${esc(tr(p,'overview'))}</p>${p.images?`<h4>${u.screens}</h4><div class="phones small">${shotsHTML(p.images)}</div>`:''}<h4>${u.features}</h4><ul>${tr(p,'features').map(f=>`<li>${esc(f)}</li>`).join('')}</ul><h4>${u.role}</h4><p>${esc(tr(p,'role'))}</p><h4>${u.tech}</h4><div class="chips">${p.chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div>${p.links.length?'':`<p class="muted-note">${u.onreq}</p>`}<div class="actions d-links">${p.links.map(([t,u],i)=>`<a class="btn${i?'':' primary'}" href="${u}" target="_blank" rel="noreferrer">${esc(lang==='th'&&LINK_TH[t]?LINK_TH[t]:t)} ↗</a>`).join('')}</div>`;
+ body.innerHTML=`<p class="tag">${p.tag}</p><h2 id="d-title">${esc(p.title)}</h2><div class="d-stats">${stats.map(([n,l])=>`<div><strong>${esc(n)}</strong><span>${esc(l)}</span></div>`).join('')}</div><p class="d-lead">${esc(tr(p,'overview'))}</p>${p.live||p.apk?`<div class="actions d-acts">${actHTML(p,u)}</div>`:''}${p.sleep?`<p class="muted-note">${u.sleep}</p>`:''}${p.demo?`<p class="muted-note">${u.demo}</p>`:''}${p.apkNote?`<p class="muted-note">${u.apknote}</p>`:''}${p.web?`<h4>${u.web}</h4>${p.live?'':`<p class="muted-note">${u.nolive}</p>`}<div class="webs">${webHTML(p.web)}</div>`:''}${p.images?`<h4>${u.screens}</h4><div class="phones small">${shotsHTML(p.images)}</div>`:''}<h4>${u.features}</h4><ul>${tr(p,'features').map(f=>`<li>${esc(f)}</li>`).join('')}</ul><h4>${u.role}</h4><p>${esc(tr(p,'role'))}</p><h4>${u.tech}</h4><div class="chips">${p.chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div>${p.links.length?'':`<p class="muted-note">${u.onreq}</p>`}<div class="actions d-links">${p.links.map(([t,u],i)=>`<a class="btn${i?'':' primary'}" href="${u}" target="_blank" rel="noreferrer">${esc(lang==='th'&&LINK_TH[t]?LINK_TH[t]:t)} ↗</a>`).join('')}</div>`;
  if(!dlg.open){dlg.showModal();dlg.scrollTop=0;}}
-list.addEventListener('click',e=>{const a=e.target.closest('.project');if(a)openProject(a.dataset.id)});
+list.addEventListener('click',e=>{if(e.target.closest('.card-acts'))return;const a=e.target.closest('.project');if(a)openProject(a.dataset.id)});
 list.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.project')){e.preventDefault();openProject(e.target.dataset.id)}});
 dlg.querySelector('.close').addEventListener('click',()=>dlg.close());
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
 
+function renderLinks(){const u=UI[lang],el=document.getElementById('link-list');if(!el)return;
+ el.innerHTML=PROJECTS.map(p=>`<li><div><strong>${esc(p.title)}</strong><span class="tag">${p.tag}</span></div><div class="lk">${p.live?`<a href="${p.live}" target="_blank" rel="noreferrer">${u.live} ↗</a>`:''}${p.apk?`<a href="${p.apk}" download>${u.apk} ↓</a>`:''}${p.links.length?`<a href="${p.links[0][1]}" target="_blank" rel="noreferrer">GitHub ↗</a>`:''}<button type="button" data-open="${p.id}">${u.web} →</button></div></li>`).join('');
+ el.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>openProject(b.dataset.open)));}
+renderLinks();
 function renderShots(){document.getElementById('phones').innerHTML=shotsHTML(SF_SHOTS);document.getElementById('phones-4her').innerHTML=shotsHTML(HE_SHOTS);}
 renderShots();
 document.querySelectorAll('[data-open]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openProject(a.dataset.open)}));
@@ -213,7 +248,7 @@ function setLang(l){
  i18nEls.forEach(el=>el.innerHTML=el.dataset[l]);
  document.title=META[l].title;document.querySelector('meta[name=description]').content=META[l].desc;
  document.getElementById('lang').dataset.active=l;
- renderList();applyFilter();renderShots();
+ renderList();applyFilter();renderShots();renderLinks();
  document.querySelectorAll('.project').forEach(el=>el.style.opacity='');
  if(dlg.open&&openId)openProject(openId);
  try{localStorage.setItem('lang',l)}catch(e){}

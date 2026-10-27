@@ -32,3 +32,12 @@ dialog{width:min(820px,calc(100% - 32px));max-height:88vh;border:0;border-radius
 :lang(th) .lead,:lang(th) .copy,:lang(th) .project p:not(.tag),:lang(th) dialog p,:lang(th) dialog li{line-height:1.85}
 @media(max-width:560px){:lang(th) .hero h1{font-size:40px}}
 :lang(th) .eyebrow,:lang(th) dialog h4,:lang(th) .stat-grid span,:lang(th) .timeline span{letter-spacing:.04em}.nw{white-space:nowrap}
+.wthumb{float:right;width:200px;height:125px;object-fit:cover;object-position:top left;border:1px solid var(--line);border-radius:6px;margin:0 0 10px 24px}
+.card-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.act{padding:9px 14px;font-size:12px}
+.d-acts{margin:4px 0 6px}
+.webs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.wshot{margin:0}.wshot button{display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#fff;cursor:zoom-in}.wshot img{display:block;width:100%;height:auto}.wshot figcaption{font:11px DM Mono,'IBM Plex Sans Thai',monospace;color:var(--muted);margin-top:6px}
+.viewer img{max-width:min(1280px,100%)}
+.link-list{list-style:none;margin:50px 0 0;padding:0;border-top:1px solid var(--line)}.link-list li{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}.link-list li>div:first-child{display:flex;flex-direction:column;gap:4px}.link-list strong{font-size:18px}.link-list .tag{margin:0}
+.lk{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.lk a,.lk button{font:600 12px Manrope,'IBM Plex Sans Thai',sans-serif;border:1px solid var(--ink);color:var(--ink);background:transparent;padding:8px 12px;border-radius:3px;text-decoration:none;cursor:pointer}.lk a:first-child{background:var(--ink);color:#fff}.lk a:hover,.lk button:hover{border-color:var(--accent);color:var(--accent)}.lk a:first-child:hover{background:var(--accent);color:#fff}
+@media(max-width:900px){.wthumb{display:none}}
+@media(max-width:560px){.webs{grid-template-columns:1fr}.link-list li{flex-direction:column;align-items:flex-start}.lk{justify-content:flex-start}}
