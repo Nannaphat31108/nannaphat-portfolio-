@@ -6,10 +6,10 @@ Personal portfolio showcasing selected software, AI/IoT, embedded and engineerin
 Enable GitHub Pages from **Settings → Pages → Deploy from a branch → main / root**.
 
 ## Featured work
-- Life Plus ERP — pharmaceutical ERP (FastAPI + PostgreSQL) — live: https://rd-erp-ai.onrender.com
+- Life Plus ERP — pharmaceutical ERP (FastAPI + PostgreSQL) — live: https://lifeplussystem.com
 - Condo Management System — billing for a condominium juristic office (Flask + SQLite) — live: https://condo-vthk.onrender.com
 - Digital Ship Inspection & Engineering Analysis System
-- Hospital Purchase System — 8 government-format Word forms
+- Hospital Purchase System — 8 government-format Word forms — live: https://hospital-purchase-system-final.onrender.com
 - Laundry Management System — PWA POS with thermal printing
 - 4Her Electric — native Android app (Java + SQLite) for an appliance shop, screenshots in `images/4her`
 - Smart Farm — Android app (Android Studio + Capacitor) for ESP32 / ESP32-CAM, with screenshots in `images/smartfarm`
