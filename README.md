@@ -7,18 +7,18 @@ Enable GitHub Pages from **Settings → Pages → Deploy from a branch → main 
 
 ## Featured work
 - Life Plus ERP — pharmaceutical ERP (FastAPI + PostgreSQL) — live: https://rd-erp-ai.onrender.com
-- Condo Management System — billing for a condominium juristic office (Flask + SQLite)
+- Condo Management System — billing for a condominium juristic office (Flask + SQLite) — live: https://condo-vthk.onrender.com
 - Digital Ship Inspection & Engineering Analysis System
 - Hospital Purchase System — 8 government-format Word forms
 - Laundry Management System — PWA POS with thermal printing
 - 4Her Electric — native Android app (Java + SQLite) for an appliance shop, screenshots in `images/4her`
 - Smart Farm — Android app (Android Studio + Capacitor) for ESP32 / ESP32-CAM, with screenshots in `images/smartfarm`
-- Smart Water — ESP32 irrigation with FastAPI
+- Smart Water — ESP32 irrigation with FastAPI — live: https://smartwater-62j7.onrender.com
 - Smart Plant Cloud — IoT sensor & image backend — live: https://smart-plant-cloud.onrender.com
-- PowerBox SOS — LoRa + GPS emergency communicator
+- PowerBox SOS — LoRa + GPS emergency communicator — live: https://powerbox-erlf.onrender.com
 - Smart Battery Charger — Arduino Nano, 2-layer PCB
 - School Room Status — classroom booking system — live: https://school-room-status.onrender.com
-- StoneCraft Cafe — bilingual cafe website with admin panel
+- StoneCraft Cafe — bilingual cafe website with admin panel — live: https://stonecraftpattaya.com
 
 Project details live in the `PROJECTS` array in `script.js`; each card opens a details dialog.
 
